@@ -1,0 +1,6 @@
+D:\dev\msu\Task91\Task91\bin\Debug\Task91.exe.config
+D:\dev\msu\Task91\Task91\bin\Debug\Task91.exe
+D:\dev\msu\Task91\Task91\bin\Debug\Task91.pdb
+D:\dev\msu\Task91\Task91\obj\Debug\Task91.exe
+D:\dev\msu\Task91\Task91\obj\Debug\Task91.pdb
+D:\dev\msu\Task91\Task91\obj\Debug\Task91.csprojResolveAssemblyReference.cache

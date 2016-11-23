@@ -1,0 +1,6 @@
+c:\users\ep\documents\visual studio 2015\Projects\task22\task22\bin\Debug\task22.exe.config
+c:\users\ep\documents\visual studio 2015\Projects\task22\task22\bin\Debug\task22.exe
+c:\users\ep\documents\visual studio 2015\Projects\task22\task22\bin\Debug\task22.pdb
+c:\users\ep\documents\visual studio 2015\Projects\task22\task22\obj\Debug\task22.exe
+c:\users\ep\documents\visual studio 2015\Projects\task22\task22\obj\Debug\task22.pdb
+c:\users\ep\documents\visual studio 2015\Projects\task22\task22\obj\Debug\task22.csprojResolveAssemblyReference.cache

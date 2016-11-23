@@ -1,0 +1,5 @@
+D:\dev\msu\task21\task21\bin\Debug\task21.exe.config
+D:\dev\msu\task21\task21\bin\Debug\task21.exe
+D:\dev\msu\task21\task21\bin\Debug\task21.pdb
+D:\dev\msu\task21\task21\obj\Debug\task21.exe
+D:\dev\msu\task21\task21\obj\Debug\task21.pdb

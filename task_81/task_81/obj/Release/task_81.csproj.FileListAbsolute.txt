@@ -1,0 +1,5 @@
+D:\dev\msu\task_81\task_81\bin\Release\task_81.exe.config
+D:\dev\msu\task_81\task_81\bin\Release\task_81.exe
+D:\dev\msu\task_81\task_81\bin\Release\task_81.pdb
+D:\dev\msu\task_81\task_81\obj\Release\task_81.exe
+D:\dev\msu\task_81\task_81\obj\Release\task_81.pdb

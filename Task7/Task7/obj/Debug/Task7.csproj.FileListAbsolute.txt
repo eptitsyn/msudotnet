@@ -1,0 +1,6 @@
+D:\dev\msu\Task7\Task7\bin\Debug\Task7.exe.config
+D:\dev\msu\Task7\Task7\bin\Debug\Task7.exe
+D:\dev\msu\Task7\Task7\bin\Debug\Task7.pdb
+D:\dev\msu\Task7\Task7\obj\Debug\Task7.csprojResolveAssemblyReference.cache
+D:\dev\msu\Task7\Task7\obj\Debug\Task7.exe
+D:\dev\msu\Task7\Task7\obj\Debug\Task7.pdb

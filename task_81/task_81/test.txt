@@ -1,0 +1,5 @@
+email, name, phone
+"asd@asd.as", "Asd Asd", "123-123-123"
+"asd@asd.as", "Asd Asd", "1a23-123-123"
+"asdasd.as", "Asd Asd", "123-123-123"
+"asd@asd.as", "Asd Asd", "123-123-123"

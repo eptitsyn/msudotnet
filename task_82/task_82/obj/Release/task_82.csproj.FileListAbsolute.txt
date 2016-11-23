@@ -1,0 +1,5 @@
+D:\dev\msu\task_82\task_82\bin\Release\task_82.exe.config
+D:\dev\msu\task_82\task_82\bin\Release\task_82.exe
+D:\dev\msu\task_82\task_82\bin\Release\task_82.pdb
+D:\dev\msu\task_82\task_82\obj\Release\task_82.exe
+D:\dev\msu\task_82\task_82\obj\Release\task_82.pdb
