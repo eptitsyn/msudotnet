@@ -13,7 +13,7 @@ namespace task10
     class Program
     {
 
-        [Serializable] public class Person
+        [Serializable] class Person
         {
             public string Firstname { get; set; }
             public string Lastname { get; set; }
@@ -22,31 +22,23 @@ namespace task10
             public string Address { get; set; }
         }
 
-        [Serializable]
-        public class Persons
+        private static void SavePersons(List<Person> Base, string filename)
         {
-            List<Person> Base { get; set; }
-            Persons() { Base = new List<Person>();}
-           Persons(List<Person> a) { Base = a;}
-        }
-
-        private static void SavePersons(Persons Base, string filename)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Persons));            
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Person>));            
             using (FileStream stream = new FileStream(filename, FileMode.Create)) 
             {
                 serializer.Serialize(stream, Base);
             }
         }
 
-        private static Persons LoadPersons(string filename)
+        private static List<Person> LoadPersons(string filename)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Person>));
             using (FileStream stream = new FileStream(filename, FileMode.Open))
             {
                // if (serializer.CanDeserialize(stream))
                 {
-                    return new Persons((List<Person>)serializer.Deserialize(stream));;
+                    return (List<Person>)serializer.Deserialize(stream);
                 }
                 //else
                 //{
@@ -112,7 +104,7 @@ namespace task10
         }
         static void Main(string[] args)
         {
-            Persons Base;
+            List<Person> Base;
             //LoadBase
             try
             {
@@ -120,7 +112,7 @@ namespace task10
             }
             catch (Exception)
             {
-                Base = new Persons();
+                Base = new List<Person>();
             }
 
             int c;
