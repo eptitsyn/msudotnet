@@ -23,7 +23,7 @@ namespace task10
             public string Address { get; set; }
             public override string ToString()
             {
-                return $"Person Name: {Firstname} {Patronymic} {Lastname} Phone: {Phone_number} Address: {Address}";
+                return $"Person Name: \"{Firstname} {Patronymic} {Lastname}\" Phone: \"{Phone_number}\" Address: \"{Address}\"";
             }
         }
 
@@ -90,7 +90,7 @@ namespace task10
             string fieldname = "", value;
             do 
             {
-                Console.WriteLine("Searchperson by:");
+                Console.WriteLine("Search person by:");
                 Console.WriteLine("1 - Firstname");
                 Console.WriteLine("2 - Lastname");
                 Console.WriteLine("3 - Patronymic");
@@ -106,7 +106,7 @@ namespace task10
                     case '5': { fieldname = "Address"; break; }
                 }
             } while (choose  < '1' || choose > '5' );
-            Console.Write("Value:");
+            Console.Write("Enter value to search:");
             value = Console.ReadLine();
             List<Person> result = dosearch(Base, fieldname, value);
             Console.WriteLine("Result ==========");
