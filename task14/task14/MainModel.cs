@@ -18,6 +18,7 @@ namespace task14
         {
             text = null;
         }
+
         public void Open()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -59,6 +60,5 @@ namespace task14
             sw.Write(text);
             sw.Close();
         }
-
     }
 }
