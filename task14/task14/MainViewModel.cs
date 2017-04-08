@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using task14.Annotations;
 
 namespace task14
@@ -179,11 +172,12 @@ namespace task14
         }
 
         private void DateTime()
-        {
+        { 
+            //костыль, чтоб курсор в начало не упрыгивал
             int oldcarretpos = mainWindow.TextBox.CaretIndex;
             Text = Text.Insert(mainWindow.TextBox.CaretIndex, System.DateTime.Now.ToString("HH:mm:ss yyyy-M-d"));
             mainWindow.TextBox.CaretIndex = oldcarretpos + System.DateTime.Now.ToString("HH:mm:ss yyyy-M-d").Length;
-                //костыль, чтоб курсор в начало не упрыгивал
+               
         }
 
         private void Exit()

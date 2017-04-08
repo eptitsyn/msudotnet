@@ -8,5 +8,10 @@ namespace task16
 {
     class MainViewModel
     {
+        MainModel model { get; set; };
+        public MainViewModel()
+        {
+            model = new MainModel();
+        }
     }
 }

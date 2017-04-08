@@ -8,5 +8,6 @@ namespace task16
 {
     class MainModel
     {
+        public Book[] Books { get; set; }
     }
 }

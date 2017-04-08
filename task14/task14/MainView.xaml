@@ -58,21 +58,15 @@
                 <MenuItem x:Name="StatusBarCheckbox" Header="Status Bar" IsCheckable="True" IsChecked="True" />
             </MenuItem>
         </Menu>
-                                                 <!--↓↓↓↓↓↓↓↓↓↓↓↓↓не знаю насколько это правильно относительно MVVM байндить вьюшку ко вьюшке-->
+                                            <!--↓↓↓↓↓↓↓↓↓↓↓↓↓ можно ли в MVVM байндить вьюшку ко вьюшке?-->
         <TextBox Name="TextBox" Grid.Row="1"
                  TextWrapping="{Binding ElementName=WordWrapCheckbox, Path=IsChecked, Converter={StaticResource BooleanToTextWrappingConverter}}"
                  SpellCheck.IsEnabled="{Binding SpellcheckCheckbox}"
                  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible"
                  Text="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="2" HorizontalAlignment="Right"
               Visibility="{Binding ElementName=StatusBarCheckbox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Separator Grid.Column="1" />
-            <TextBlock Grid.Column="2" Text="Status Bar(nothing here is implimented you can hide me from menu)" />
+            <TextBlock Text="Status Bar(nothing here is implimented you can hide me from menu)" />
         </Grid>
     </Grid>
 </Window>
