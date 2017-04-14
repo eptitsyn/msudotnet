@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace task16
+namespace task19
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +23,11 @@ namespace task16
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MediaElement_OnMediaEnded(object sender, RoutedEventArgs e)
+        {
+            //MainViewModel.
         }
     }
 }
