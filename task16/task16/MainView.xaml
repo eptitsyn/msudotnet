@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:task16"
         mc:Ignorable="d"
         Title="Task 16" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <local:YearToNovinkaConverter x:Key="YearToNovinkaConverter" />
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">

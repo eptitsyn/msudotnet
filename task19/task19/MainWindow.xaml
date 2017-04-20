@@ -36,6 +36,13 @@
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="btnelipse1" Property="Fill">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="img/play_disabled.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -82,7 +89,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- -->
+        <!-- Volume Slider. from MSDN-->
         <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -175,6 +182,55 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- end of voume slider -->
+        <!-- button auto style-->
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border CornerRadius="10">
+                            <Rectangle Margin="2" StrokeThickness="1" Stroke="#60000000" StrokeDashArray="1 2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+            <Setter Property="MinHeight" Value="24"/>
+            <Setter Property="MinWidth" Value="24"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" CornerRadius="12" BorderThickness="1" Background="LightBlue" BorderBrush="DarkBlue"> 
+                            <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Wheat" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="Blue" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="DarkBlue" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="DarkGray" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="DarkGray" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
+                                <Setter Property="Foreground" Value="DarkGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <!--<Window.DataContext>
         <local:MainViewModel x:Name="MainViewModel"/>
@@ -196,15 +252,15 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <CheckBox Content="Shuffle" VerticalAlignment="Center"/>
+                <!--<CheckBox Content="Shuffle" VerticalAlignment="Center"/>
                 <CheckBox Content="Repeat"/>
-                <Separator/>
+                <Separator/>-->
                 <Button Content="Stop"/>
                 <Button Content="Prev"/>
-                <Button Content="Play" Style="{StaticResource PlayButtonStyle}"/>
+                <Button Content="Play" Command="{Binding PlayPauseCommand}" Style="{StaticResource PlayButtonStyle}"/>
                 <Button Content="Next"/>
-                <CheckBox Content="Mute" Style="{StaticResource MuteButtonStyle}" VerticalAlignment="Center"/>
-                <Slider Width="100" Maximum="100" Height="30"  Style="{StaticResource VolumeStyle}"/>
+                <CheckBox Content="Mute" Style="{StaticResource MuteButtonStyle}" VerticalAlignment="Center" IsChecked="{Binding ElementName=MediaWindow,Path=IsMuted}"/>
+                <Slider Width="100" Maximum="1" Style="{StaticResource VolumeStyle}" Value="{Binding ElementName=MediaWindow, Path=Volume}" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
         <Grid DockPanel.Dock="Left" Visibility="{Binding ElementName=PlaylistCheckbox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -212,7 +268,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="PlaylistList" MinWidth="100" MaxWidth="300"  ItemsSource="{Binding Playlist}">
+            <ListView x:Name="PlaylistList" MinWidth="100" MaxWidth="300"  ItemsSource="{Binding Playlist}" SelectedItem="{Binding Path=CurrentUri, Mode=TwoWay}" MouseDoubleClick="PlaylistList_OnMouseDoubleClick">
                 
             </ListView>
             <StackPanel Grid.Row="1" Orientation="Horizontal">

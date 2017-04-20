@@ -20,6 +20,7 @@ namespace task18
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -28,8 +29,11 @@ namespace task18
 
         private void Canvas_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Type t = ((MainViewModel)DataContext).SelectedShape.GetType();
-            Shape figure = (Shape)Activator.CreateInstance(t);
+            //Shape figure = (Shape)Activator.CreateInstance(((MainViewModel)DataContext).SelectedShape.GetType());
+            Shape figure = ((MainViewModel)DataContext).SelectedShape;
+            figure = 
+
+            figure = ((MainViewModel) DataContext).SelectedShape;
             figure.Fill = ((MainViewModel)DataContext).BackgroundBrush;
             figure.Stroke = ((MainViewModel)DataContext).ForegroundBrush;
             figure.StrokeThickness = 1;
@@ -68,11 +72,6 @@ namespace task18
                 ((MainViewModel)DataContext).BackgroundBrush = (Brush)ColorSelector.SelectedItem;
             }
             
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(((MainViewModel) DataContext).ForegroundBrush.ToString());
         }
 
         private void Shapes_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

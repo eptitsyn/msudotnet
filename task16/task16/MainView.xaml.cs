@@ -23,7 +23,6 @@ namespace task16
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
         }
     }
 }

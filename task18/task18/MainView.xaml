@@ -9,18 +9,28 @@
     <Window.Resources>
         <local:ShapeToStringConverter x:Key="ShapeToStringConverter" />
         <DataTemplate x:Key="brushtemplate">
-            <Rectangle Fill="{Binding}" Width="20" Height="20"/>
+            <Rectangle Fill="{Binding}" Width="40" Height="40" Stroke="Black"/>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="{x:Static SystemColors.MenuBarBrush}">
-            <Grid>
-                <Button Content="asd"  Background="{Binding ElementName=ColorSelector, Path=SelectedItem}" Click="Button_Click"/>
-            </Grid>
-            <Separator Height="50" Margin="10" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1"/>
+            <!--<Button Content="asd"  Background="{Binding ElementName=ColorSelector, Path=SelectedItem}" Click="Button_Click"/>-->
             <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="fgBrushButton" GroupName="1" Content="{Binding ForegroundBrush}" ContentTemplate="{StaticResource brushtemplate}" IsChecked="True"/>
-                <RadioButton x:Name="bgBrushButton" GroupName="1" Content="{Binding BackgroundBrush}" ContentTemplate="{StaticResource brushtemplate}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Foreground"/>
+                    <RadioButton Grid.Column="1" x:Name="fgBrushButton" GroupName="1" Content="{Binding ForegroundBrush}" ContentTemplate="{StaticResource brushtemplate}" IsChecked="True" />
+                    <TextBlock Grid.Row="1" Text="Background"/>
+                    <RadioButton Grid.Row="1" Grid.Column="1" x:Name="bgBrushButton" GroupName="1" Content="{Binding BackgroundBrush}" ContentTemplate="{StaticResource brushtemplate}"/>
+                </Grid>
+
                 <ListView Name="ColorSelector" SelectionChanged="ColorSelector_OnSelectionChanged">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="Brush">
@@ -43,13 +53,14 @@
                     <Brush>Magenta</Brush>
                     <Brush>DarkViolet</Brush>
                 </ListView>
-                <ListView Name="Shapes" SelectionChanged="Shapes_OnSelectionChanged">
+                <ListView Name="Shapes" SelectionChanged="Shapes_OnSelectionChanged" SelectedItem="{Binding ListboxSelectedShape}">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="Brush">
                             <TextBlock Text="{Binding Converter={StaticResource ShapeToStringConverter}}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <Rectangle/>
+                    <Rectangle RadiusX="10" RadiusY="10"/>
                     <Ellipse/>
                     <Line/>
                     <Polygon/>

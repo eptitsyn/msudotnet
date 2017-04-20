@@ -18,6 +18,15 @@ namespace task19
         }
 
         private MainWindow mainWindow { get; set; }
+
+        private Uri _currentUri;
+        public Uri CurrentUri { get { return _currentUri;} set {
+            if (_currentUri != value)
+            {
+                _currentUri = value;
+                OnPropertyChanged();
+            }
+        } }
         private ObservableCollection<Uri> _playlist;
         public ObservableCollection<Uri> Playlist {
             get
@@ -51,6 +60,7 @@ namespace task19
         {
             AddToPlaylistCommand = new RelayCommand(o => AddToPlaylist());
             ExitCommand = new RelayCommand(o => Exit());
+            PlayPauseCommand = new RelayCommand(o => PlayPause());
         }
 
 
@@ -72,7 +82,14 @@ namespace task19
 
         private void PlayPause()
         {
-            //
+            //if (mainWindow.MediaWindow.Source != null)
+            //{
+                
+            //}
+            //else
+            {
+                mainWindow.MediaWindow.Source = CurrentUri;
+            }
         }
 
         /// <summary>

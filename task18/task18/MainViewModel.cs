@@ -57,6 +57,26 @@ namespace task18
                 }
             }
         }
+
+        public Shape ListboxSelectedShape
+        {
+            get
+            {
+                return listboxSelectedShape;
+            }
+
+            set
+            {
+                if (value != listboxSelectedShape)
+                {
+                    listboxSelectedShape = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private Shape listboxSelectedShape;
+
         public MainViewModel()
         {
             model = new MainModel();

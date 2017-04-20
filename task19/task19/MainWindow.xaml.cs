@@ -29,5 +29,10 @@ namespace task19
         {
             //MainViewModel.
         }
+
+        private void PlaylistList_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ((MainViewModel)DataContext).PlayPauseCommand.Execute(this);
+        }
     }
 }
