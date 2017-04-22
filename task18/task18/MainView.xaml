@@ -3,20 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:task18"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <local:ShapeToStringConverter x:Key="ShapeToStringConverter" />
+        <local:StringToShapesEnumConverter x:Key="StringToShapesEnumConverter"/>
         <DataTemplate x:Key="brushtemplate">
             <Rectangle Fill="{Binding}" Width="40" Height="40" Stroke="Black"/>
         </DataTemplate>
     </Window.Resources>
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="{x:Static SystemColors.MenuBarBrush}">
-            <!--<Button Content="asd"  Background="{Binding ElementName=ColorSelector, Path=SelectedItem}" Click="Button_Click"/>-->
+            <!--<Button Content="Selected Color"  Background="{Binding ElementName=ColorSelector, Path=SelectedItem}" Click="Button_Click"/>-->
             <StackPanel Orientation="Horizontal">
-                <Grid>
+                <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
@@ -31,7 +33,7 @@
                     <RadioButton Grid.Row="1" Grid.Column="1" x:Name="bgBrushButton" GroupName="1" Content="{Binding BackgroundBrush}" ContentTemplate="{StaticResource brushtemplate}"/>
                 </Grid>
 
-                <ListView Name="ColorSelector" SelectionChanged="ColorSelector_OnSelectionChanged">
+                <ListView Name="ColorSelector" SelectionChanged="ColorSelector_OnSelectionChanged" Margin="5">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="Brush">
                             <Rectangle Width="30" Height="30" Fill="{Binding}" Stroke="Black"/>
@@ -53,28 +55,39 @@
                     <Brush>Magenta</Brush>
                     <Brush>DarkViolet</Brush>
                 </ListView>
-                <ListView Name="Shapes" SelectionChanged="Shapes_OnSelectionChanged" SelectedItem="{Binding ListboxSelectedShape}">
+                <!--<ListView Name="Shapes" SelectionChanged="Shapes_OnSelectionChanged" SelectedItem="{Binding ListboxSelectedShape}" Margin="5">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="Brush">
                             <TextBlock Text="{Binding Converter={StaticResource ShapeToStringConverter}}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <Rectangle/>
-                    <Rectangle RadiusX="10" RadiusY="10"/>
+                    <Rectangle Width="100" Height="100"/>
+                    <Rectangle Width="100" Height="100" RadiusX="10" RadiusY="10"/>
                     <Ellipse/>
                     <Line/>
                     <Polygon/>
+                </ListView>-->
+                <ListView SelectedItem="{Binding SelectedListboxShape, Converter={StaticResource StringToShapesEnumConverter}, Mode=OneWayToSource}">
+                    <ListViewItem Content="Rectangle"/>
+                    <ListViewItem Content="Rounded Rectangle"/>
+                    <ListViewItem Content="Circle"/>
+                    <ListViewItem Content="Triangle"/>
                 </ListView>
             </StackPanel>
-            <Button Click="ButtonBase_OnClick">asd</Button>
         </StackPanel>
-        <!--<Grid DockPanel.Dock="Bottom" Background="{x:Static SystemColors.MenuBarBrush}">
-            <TextBlock>Statusbar</TextBlock>
-        </Grid>-->
+        <Grid DockPanel.Dock="Bottom" Background="{x:Static SystemColors.MenuBarBrush}">
+            <TextBlock Text="{Binding MouseCoords, StringFormat=# }"/>
+        </Grid>
         <ItemsControl ItemsSource="{Binding Figures}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas/>
+                    <Canvas Background="White" MouseMove="UIElement_OnMouseMove" ClipToBounds="True">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding AddFigureCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Canvas>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>

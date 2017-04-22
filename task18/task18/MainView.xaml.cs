@@ -49,20 +49,10 @@ namespace task18
             //Shape l = new Line();           
         }
 
-        private void figure_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ((Ellipse)sender).Fill = Brushes.Red;
-            e.Handled = true;
-        }
 
-        private void ColorSelector_OnSelected(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Asd");
-        }
 
         private void ColorSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Затычка переделать.
             if (fgBrushButton.IsChecked == true)
             {
                 ((MainViewModel)DataContext).ForegroundBrush = (Brush)ColorSelector.SelectedItem;
@@ -74,20 +64,18 @@ namespace task18
             
         }
 
-        private void Shapes_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Получаем координаты мыши.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UIElement_OnMouseMove(object sender, MouseEventArgs e)
         {
-            ((MainViewModel) DataContext).SelectedShape = (Shape)Shapes.SelectedItem;
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var f = new MyFigure() { Width = 100, Height = 100, X = 150, Y = 160 };
-            f.DefiningGeometry = new EllipseGeometry() {RadiusX = 5, RadiusY = 5};
-            f.Foreground = Brushes.Red;
-            f.Background = Brushes.Aqua;
-            
-            ((MainViewModel)DataContext).Figures = new ObservableCollection<MyFigure>();
-            ((MainViewModel)DataContext).Figures.Add(f);
+            if (sender is Canvas)
+            {
+                Point coords = e.GetPosition((Canvas)sender);
+                ((MainViewModel)DataContext).MouseCoords = coords;
+            }
         }
     }
 }
