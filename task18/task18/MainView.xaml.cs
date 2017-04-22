@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,23 +31,22 @@ namespace task18
         private void Canvas_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             //Shape figure = (Shape)Activator.CreateInstance(((MainViewModel)DataContext).SelectedShape.GetType());
-            Shape figure = ((MainViewModel)DataContext).SelectedShape;
-            figure = 
+            //Shape figure = ((MainViewModel)DataContext).SelectedShape;
+            //figure = 
 
-            figure = ((MainViewModel) DataContext).SelectedShape;
-            figure.Fill = ((MainViewModel)DataContext).BackgroundBrush;
-            figure.Stroke = ((MainViewModel)DataContext).ForegroundBrush;
-            figure.StrokeThickness = 1;
-            figure.Width = 100;
-            figure.Height = 100;
-            figure.MouseDown += figure_OnMouseDown; 
+            //figure = ((MainViewModel) DataContext).SelectedShape;
+            //figure.Fill = ((MainViewModel)DataContext).BackgroundBrush;
+            //figure.Stroke = ((MainViewModel)DataContext).ForegroundBrush;
+            //figure.StrokeThickness = 1;
+            //figure.Width = 100;
+            //figure.Height = 100;
+            //figure.MouseDown += figure_OnMouseDown; 
             
 
-            Canvas.Children.Add(figure);
-            Canvas.SetTop(figure, e.GetPosition(this).Y-100);
-            Canvas.SetLeft(figure, e.GetPosition(this).X);
-            Shape l = new Line();
-            
+            //Canvas.Children.Add(figure);
+            //Canvas.SetTop(figure, e.GetPosition(this).Y-100);
+            //Canvas.SetLeft(figure, e.GetPosition(this).X);
+            //Shape l = new Line();           
         }
 
         private void figure_OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -77,6 +77,17 @@ namespace task18
         private void Shapes_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ((MainViewModel) DataContext).SelectedShape = (Shape)Shapes.SelectedItem;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var f = new MyFigure() { Width = 100, Height = 100, X = 150, Y = 160 };
+            f.DefiningGeometry = new EllipseGeometry() {RadiusX = 5, RadiusY = 5};
+            f.Foreground = Brushes.Red;
+            f.Background = Brushes.Aqua;
+            
+            ((MainViewModel)DataContext).Figures = new ObservableCollection<MyFigure>();
+            ((MainViewModel)DataContext).Figures.Add(f);
         }
     }
 }

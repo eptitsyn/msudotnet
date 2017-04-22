@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -13,9 +14,43 @@ namespace task18
 {
     class MainViewModel:INotifyPropertyChanged
     {
-        private MainModel model { get; set; }
+        private MainModel Model { get; set; }
 
-        private Brush _foregroundBrush;
+        /// <summary>
+        /// Здесь храним перечень объектов на холсте
+        /// </summary>
+        private ObservableCollection<MyFigure> figures;
+
+        public ObservableCollection<MyFigure> Figures
+        {
+            get
+            {
+                return figures;
+            }
+
+            set
+            {
+                figures = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// 
+        /// </summary>
+
+        private Brush _foregroundBrush = Brushes.Black;
         public Brush ForegroundBrush
         {
             get { return _foregroundBrush; }
@@ -29,7 +64,7 @@ namespace task18
             } 
         }
 
-        private Brush _backgroundBrush;
+        private Brush _backgroundBrush = Brushes.White;
         public Brush BackgroundBrush
         {
             get { return _backgroundBrush; }
@@ -75,11 +110,14 @@ namespace task18
             }
         }
 
+
+
         private Shape listboxSelectedShape;
 
         public MainViewModel()
         {
-            model = new MainModel();
+            Model = new MainModel();
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

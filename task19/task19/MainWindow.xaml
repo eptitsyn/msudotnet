@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:task19"
         xmlns:io="clr-namespace:System.IO;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="316" Width="706">
     <Window.Resources>
         <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <!-- Play button-->
@@ -27,7 +27,7 @@
                                     <Setter.Value>
                                         <ImageBrush ImageSource="img/plau_highlited.png"/>
                                     </Setter.Value>
-                                 </Setter>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="btnelipse1" Property="Fill">
@@ -43,6 +43,13 @@
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
+                            <DataTrigger Binding="{Binding CanPause}">
+                                <Setter TargetName="btnelipse1" Property="Fill">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="img/play_disabled.png"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -176,7 +183,7 @@
                             </Track>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -204,7 +211,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="Border" CornerRadius="12" BorderThickness="1" Background="LightBlue" BorderBrush="DarkBlue"> 
+                        <Border x:Name="Border" CornerRadius="12" BorderThickness="1" Background="LightBlue" BorderBrush="DarkBlue">
                             <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -261,6 +268,8 @@
                 <Button Content="Next"/>
                 <CheckBox Content="Mute" Style="{StaticResource MuteButtonStyle}" VerticalAlignment="Center" IsChecked="{Binding ElementName=MediaWindow,Path=IsMuted}"/>
                 <Slider Width="100" Maximum="1" Style="{StaticResource VolumeStyle}" Value="{Binding ElementName=MediaWindow, Path=Volume}" VerticalAlignment="Center"/>
+                <CheckBox IsChecked="{Binding ElementName=MediaWindow, Path=CanPause, Mode=OneWay}"/>
+                <Button Click="ButtonBase_OnClick"/>
             </StackPanel>
         </Grid>
         <Grid DockPanel.Dock="Left" Visibility="{Binding ElementName=PlaylistCheckbox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -269,14 +278,17 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <ListView x:Name="PlaylistList" MinWidth="100" MaxWidth="300"  ItemsSource="{Binding Playlist}" SelectedItem="{Binding Path=CurrentUri, Mode=TwoWay}" MouseDoubleClick="PlaylistList_OnMouseDoubleClick">
-                
+
             </ListView>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Content="Add" Command="{Binding AddToPlaylistCommand}"/>
                 <Button Content="Remove"/>
             </StackPanel>
         </Grid>
-        <MediaElement Name="MediaWindow" MediaEnded="MediaElement_OnMediaEnded"/>
+        <Slider Name="TimelineSlider" DockPanel.Dock="Bottom" ValueChanged="TimelinesSlider_OnValueChanged" Thumb.DragCompleted="TimelineSlider_OnDragCompleted"/>
+        <Grid Background="Black">
+            <MediaElement Name="MediaWindow" MediaEnded="MediaElement_OnMediaEnded" MediaOpened="MediaWindow_OnMediaOpened"/>
+        </Grid>
     </DockPanel>
 
 </Window>

@@ -66,10 +66,29 @@
                     <Polygon/>
                 </ListView>
             </StackPanel>
+            <Button Click="ButtonBase_OnClick">asd</Button>
         </StackPanel>
-        <Grid DockPanel.Dock="Bottom" Background="{x:Static SystemColors.MenuBarBrush}">
+        <!--<Grid DockPanel.Dock="Bottom" Background="{x:Static SystemColors.MenuBarBrush}">
             <TextBlock>Statusbar</TextBlock>
-        </Grid>
-        <Canvas Name="Canvas" Background="White" MouseDown="Canvas_OnMouseDown" ClipToBounds="True"/>
+        </Grid>-->
+        <ItemsControl ItemsSource="{Binding Figures}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Path Data="{Binding DefiningGeometry}" Fill="{Binding Background}" Stroke="{Binding Foreground}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <!--<Canvas Name="Canvas" Background="White" MouseDown="Canvas_OnMouseDown" ClipToBounds="True"/>-->
     </DockPanel>
 </Window>
