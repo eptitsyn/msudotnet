@@ -61,9 +61,11 @@ namespace task18
         }
 
         public RelayCommand AddFigureCommand { get; private set; }
+        //public RelayCommand MouseMoveCommand { get; private set; }
         private void InitializeCommands()
         {
             AddFigureCommand = new RelayCommand(o => AddFigure());
+            //MouseMoveCommand = new RelayCommand(o => MouseMove(o));
         }
 
         private bool _havefirstpoint;
@@ -128,6 +130,14 @@ namespace task18
             }
         }
 
+        //private void MouseMove(object o)
+        //{
+        //    if (o != null)
+        //    {
+        //        MessageBox.Show(o.ToString());
+        //    }
+        //}
+
         public enum ShapesEnum
         {
             Rectangle,
@@ -185,6 +195,30 @@ namespace task18
             } 
         }
 
+        private bool isforegroundselected = true;
+        public bool IsForegroundSelected { get { return isforegroundselected; } set { isforegroundselected = value; OnPropertyChanged(); } }
+
+        public Brush SelectedColor
+        {
+            get
+            {
+                if (IsForegroundSelected) return ForegroundBrush;
+                else return BackgroundBrush;
+            }
+            set
+            {
+                if (IsForegroundSelected)
+                {
+                    ForegroundBrush = value;
+                }
+                else
+                {
+                    BackgroundBrush = value;
+                }
+                OnPropertyChanged();
+            }
+        }
+
         private Shape _selectedShape;
 
         public Shape SelectedShape
@@ -216,6 +250,8 @@ namespace task18
                 }
             }
         }
+
+
 
         private Shape listboxSelectedShape;
 

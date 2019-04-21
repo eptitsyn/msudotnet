@@ -16,7 +16,6 @@
     </Window.Resources>
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="{x:Static SystemColors.MenuBarBrush}">
-            <!--<Button Content="Selected Color"  Background="{Binding ElementName=ColorSelector, Path=SelectedItem}" Click="Button_Click"/>-->
             <StackPanel Orientation="Horizontal">
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
@@ -28,12 +27,12 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Foreground"/>
-                    <RadioButton Grid.Column="1" x:Name="fgBrushButton" GroupName="1" Content="{Binding ForegroundBrush}" ContentTemplate="{StaticResource brushtemplate}" IsChecked="True" />
+                    <RadioButton Grid.Column="1" x:Name="fgBrushButton" GroupName="1" Content="{Binding ForegroundBrush}" ContentTemplate="{StaticResource brushtemplate}" IsChecked="{Binding IsForegroundSelected}" />
                     <TextBlock Grid.Row="1" Text="Background"/>
                     <RadioButton Grid.Row="1" Grid.Column="1" x:Name="bgBrushButton" GroupName="1" Content="{Binding BackgroundBrush}" ContentTemplate="{StaticResource brushtemplate}"/>
                 </Grid>
 
-                <ListView Name="ColorSelector" SelectionChanged="ColorSelector_OnSelectionChanged" Margin="5">
+                <ListView Name="ColorSelector" Margin="5" SelectedItem="{Binding SelectedColor}">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="Brush">
                             <Rectangle Width="30" Height="30" Fill="{Binding}" Stroke="Black"/>
@@ -55,18 +54,6 @@
                     <Brush>Magenta</Brush>
                     <Brush>DarkViolet</Brush>
                 </ListView>
-                <!--<ListView Name="Shapes" SelectionChanged="Shapes_OnSelectionChanged" SelectedItem="{Binding ListboxSelectedShape}" Margin="5">
-                    <ListView.ItemTemplate>
-                        <DataTemplate DataType="Brush">
-                            <TextBlock Text="{Binding Converter={StaticResource ShapeToStringConverter}}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <Rectangle Width="100" Height="100"/>
-                    <Rectangle Width="100" Height="100" RadiusX="10" RadiusY="10"/>
-                    <Ellipse/>
-                    <Line/>
-                    <Polygon/>
-                </ListView>-->
                 <ListView SelectedItem="{Binding SelectedListboxShape, Converter={StaticResource StringToShapesEnumConverter}, Mode=OneWayToSource}">
                     <ListViewItem Content="Rectangle"/>
                     <ListViewItem Content="Rounded Rectangle"/>
@@ -86,6 +73,9 @@
                             <i:EventTrigger EventName="MouseLeftButtonDown">
                                 <i:InvokeCommandAction Command="{Binding AddFigureCommand}"/>
                             </i:EventTrigger>
+                            <!--<i:EventTrigger EventName="MouseMove">
+                                <i:InvokeCommandAction Command="{Binding MouseMoveCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                            </i:EventTrigger>-->
                         </i:Interaction.Triggers>
                     </Canvas>
                 </ItemsPanelTemplate>
@@ -102,6 +92,5 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <!--<Canvas Name="Canvas" Background="White" MouseDown="Canvas_OnMouseDown" ClipToBounds="True"/>-->
     </DockPanel>
 </Window>

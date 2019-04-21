@@ -28,44 +28,9 @@ namespace task18
             DataContext = new MainViewModel();
         }
 
-        private void Canvas_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //Shape figure = (Shape)Activator.CreateInstance(((MainViewModel)DataContext).SelectedShape.GetType());
-            //Shape figure = ((MainViewModel)DataContext).SelectedShape;
-            //figure = 
-
-            //figure = ((MainViewModel) DataContext).SelectedShape;
-            //figure.Fill = ((MainViewModel)DataContext).BackgroundBrush;
-            //figure.Stroke = ((MainViewModel)DataContext).ForegroundBrush;
-            //figure.StrokeThickness = 1;
-            //figure.Width = 100;
-            //figure.Height = 100;
-            //figure.MouseDown += figure_OnMouseDown; 
-            
-
-            //Canvas.Children.Add(figure);
-            //Canvas.SetTop(figure, e.GetPosition(this).Y-100);
-            //Canvas.SetLeft(figure, e.GetPosition(this).X);
-            //Shape l = new Line();           
-        }
-
-
-
-        private void ColorSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (fgBrushButton.IsChecked == true)
-            {
-                ((MainViewModel)DataContext).ForegroundBrush = (Brush)ColorSelector.SelectedItem;
-            }
-            else
-            {
-                ((MainViewModel)DataContext).BackgroundBrush = (Brush)ColorSelector.SelectedItem;
-            }
-            
-        }
 
         /// <summary>
-        /// Получаем координаты мыши.
+        /// Получаем координаты мыши. Не нашел как в комманду передать MouseEventArgs по этому сделал событием
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

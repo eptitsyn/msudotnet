@@ -17,7 +17,7 @@ namespace task19
         {
             base.OnStartup(e);
             MainWindow mainWindow = new MainWindow();
-            MainViewModel viewModel = new MainViewModel(mainWindow);
+            MainViewModel viewModel = new MainViewModel();
             mainWindow.DataContext = viewModel;
             MainWindow = mainWindow;
             mainWindow.Show();

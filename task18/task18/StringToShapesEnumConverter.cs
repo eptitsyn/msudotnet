@@ -24,9 +24,6 @@ namespace task18
 
             if (value != null)
             {
-                //MessageBox.Show((string) ((ListViewItem) value).Content);
-
-
                 if (((ListViewItem) value).Content.ToString() == "Rectangle") return MainViewModel.ShapesEnum.Rectangle;
                 if (((ListViewItem) value).Content.ToString() == "Rounded Rectangle") return MainViewModel.ShapesEnum.RRectangle;
                 if (((ListViewItem) value).Content.ToString() == "Circle") return MainViewModel.ShapesEnum.Circle;
